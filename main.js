@@ -42,8 +42,9 @@ fontchange = function(size){
 	change(lastval);
 }
 
-download = function(element) {
-  var image = c.toDataURL("image/png");
-  image.crossOrigin="anonymous"
-  element.href = image;
-};
+imgdl = function(el){
+	console.log(el);
+	var image = c.toDataURL("image/jpg");
+	image.crossOrigin="anonymous";
+	el.href = image;
+}
