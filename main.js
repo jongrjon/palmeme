@@ -46,5 +46,4 @@ download = function(element) {
   var image = c.toDataURL("image/png");
   image.crossOrigin="anonymous"
   element.href = image;
-  console.log(image);
 };
