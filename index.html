@@ -3,22 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Hvað segir Pálmi?</title>
-    <!--<link rel="stylesheet" href="style.css"> -->
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="palmi.css">
    
   </head>
   <body>
-  	<h1>Hvað segir Pálmi</h1>
-  	<div id=container>
-  		<div id ="preview">
+  	<div class="container">
+  		<h1>Hvað segir Pálmi?
+        <small>Þú ræður!</small>
+      </h1>
+      <h4>Fylltu inn með þínum eigin texta og sæktu myndina.</h4>
+      <div id ="preview">
     		<canvas id="pcanv" width="800" height="800">
 			</canvas>
     	</div>
     	<div id="controls">
- 		<input id="typer" type="text" oninput="change(this.value)" />
- 		<input type="range" min="1" max="100" value="60" oninput="fontchange(this.value)" class="slider" id="fSize">
- 		<a id="download" download="myImage.jpg" href="" onclick="imgdl(this)">Sækja mynd</a>   		
+        <div class="col-md-6 col-xs-12 col-sm-12">
+          <div class="input-group">
+            <span class="input-group-addon" id="imgtext">„...“</span>
+            <input type="text" class="form-control" placeholder="Hvað segir Pálmi?" aria-describedby="basic-addon1" oninput="change(this.value)">
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12 col-sm-12">
+          <div class="input-group">
+            <span class="input-group-addon" id="fontsize"> <span class="glyphicon glyphicon-text-size" aria-hidden="true"></span>.. </span><input type="range" min="1" max="100" value="60" oninput="fontchange(this.value)" class="slider" id="fSize">
+          </div>
+        </div>
+        <div class="col-md-12 col-xs-12 col-sm-12" id="dldiv">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="download" download="PalmiSegir.jpg" href="" onclick="imgdl(this)">Sækja mynd</button>
+        </div>
+        <div id="imagedl"><a id="download" download="PalmiSegir.jpg" href="" onclick="imgdl(this)">Sækja mynd</a></div>
     	</div>
   	</div>
   </body>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
    <script src="main.js"></script>
+   <script src="jquery-3.6.0.min.js"></script>
 </html>
