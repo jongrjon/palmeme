@@ -12,11 +12,18 @@ var fontsize = 60;
 
 change = function(val) {
   
-  console.log(ctx.measureText(val).width);
   ctx.font = fontsize+"px Impact";
   if(ctx.measureText(val).width<600){
   	lastval=val;
   	inserttext(val);
+  }
+  else if(fontsize > 20){
+  	fontsize -= 5;
+  	document.getElementById("fSize").value = fontsize;
+  	change(val);
+  }
+  else{
+  	change(lastval);
   }
 }
 
@@ -43,7 +50,6 @@ fontchange = function(size){
 }
 
 imgdl = function(el){
-	console.log(el);
 	var image = c.toDataURL("image/jpg");
 	image.crossOrigin="anonymous";
 	el.href = image;
