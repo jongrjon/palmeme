@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 //Fetching Video element by ID
 var video = document.getElementById('video');
 
@@ -60,21 +58,71 @@ picsnap = function(){
 //PICTURE CANVAS
 
 //Fetching Picture Canvas
->>>>>>> Stashed changes
 var c = document.getElementById("pcanv");
 var ctx = c.getContext("2d");
 
-var background = new Image();
-background.src = "palmi.jpg";
+//Creating Palmi image from file
+var palmi = new Image();
+palmi.src = "palmi.jpg";
+palmi.crossOrigin="anonymous";
 
+var cutout = new Image();
+cutout.src = "palmi_transp.png"
+cutout.crossOrigin="anonymous";
+
+var background = palmi;
+
+//
 background.onload = function(){
-  ctx.drawImage(background,0,0);   
+	resetbg();
 }
+
+
+//Resetting BG
+resetbg = function(){
+	vtx.clearRect(0, 0, c.width, c.height);
+	vtx.restore();
+	ctx.clearRect(0, 0, c.width, c.height);
+	ctx.restore();
+	vtx.drawImage(background,0,0);
+	ctx.drawImage(v,0,0);
+	fontsize=60;
+	document.getElementById("fSize").value = fontsize;
+	lastval = "";
+	document.getElementById("palmisays").value = lastval;
+
+}
+
+//Take a new snap if 
+newsnap = function(){
+	background = cutout;
+	resetbg();
+	$("#editPButton").toggle();
+	$("#snapButton").toggle();
+}
+
+verap = function(){
+	background = cutout;
+	resetbg();
+	$("#snapButton").toggle();
+	$("#veraPButton").toggle();
+}
+
+stopp = function(){
+	background = palmi;
+	resetbg();
+	$("#editPButton").toggle();
+	$("#veraPButton").toggle();
+}
+
+
+
+//Last valid text input
 var lastval = "";
+//Input fontsize
 var fontsize = 60;
 
 change = function(val) {
-  
   ctx.font = fontsize+"px Impact";
   if(ctx.measureText(val).width<600){
   	lastval=val;
@@ -93,7 +141,7 @@ change = function(val) {
 inserttext =function(text){
 	ctx.clearRect(0, 0, c.width, c.height);
 	ctx.restore();
-	ctx.drawImage(background,0,0);
+	ctx.drawImage(v,0,0);
 	ctx.font = fontsize+"px Impact";
 	ctx.textAlign = "center";
 	height = 200;
@@ -111,7 +159,7 @@ fontchange = function(size){
   console.log(lastval);
 	change(lastval);
 }
-
+//Download Image
 imgdl = function(el){
 	var image = c.toDataURL("image/jpg");
 	image.crossOrigin="anonymous";

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>PálMeme</title>
     <!-- Latest compiled and minified Bootstrap CSS -->
+    <script src="jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet" href="palmi.css">
    
@@ -11,18 +12,37 @@
   <body>
   	<div class="container">
   		<h1>Hvað segir Pálmi?
-        <small>Þú ræður!</small>
+        <small>Þú ræður!</small><span class="label label-info">Nú getur þú verið Pálmi!</span>
       </h1>
       <h4>Fylltu inn með þínum eigin texta og sæktu myndina.</h4>
-      <div id ="preview">
-    		<canvas id="pcanv" width="800" height="800">
-			</canvas>
-    	</div>
+      <div id="buttons">
+        <div id="snapButton">
+          <a id="snap" class="btn btn-primary btn-lg btn-block" onclick="picsnap()">Taka mynd</a>
+        </div>
+        <div id="veraPButton">
+          <a id="verap" class="btn btn-success btn-lg btn-block" onclick="verap()">Ég vil vera Pálmi</a>
+        </div>
+        <div id="editPButton">
+            <div class="col-md-6 col-xs-6 col-sm-6">
+               <a id="newsnap" class="btn btn-success btn-lg btn-block" onclick="newsnap()">Taka nýja mynd</a>
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6">
+               <a id="stopp" class="btn btn-danger btn-lg btn-block" onclick="stopp()">Hætta að vera Pálmi</a>
+            </div>
+        </div>
+      </div>
+      <div id="buffer">
+        <div id ="preview">
+          <video id="video" playsinline autoplay></video>
+          <canvas id="vcanv" width="800" height="800"></canvas>
+      		<canvas id="pcanv" width="800" height="800"></canvas>
+      	</div>
+      </div>
     	<div id="controls">
         <div class="col-md-6 col-xs-12 col-sm-12">
           <div class="input-group">
             <span class="input-group-addon" id="imgtext">„...“</span>
-            <input type="text" class="form-control" placeholder="Hvað segir Pálmi?" aria-describedby="basic-addon1" oninput="change(this.value)">
+            <input type="text" class="form-control" id="palmisays" placeholder="Hvað segir Pálmi?" aria-describedby="basic-addon1" oninput="change(this.value)">
           </div>
         </div>
         <div class="col-md-6 col-xs-12 col-sm-12">
@@ -38,5 +58,4 @@
   </body>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
    <script src="main.js"></script>
-   <script src="jquery-3.6.0.min.js"></script>
 </html>
