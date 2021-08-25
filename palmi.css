@@ -1,9 +1,23 @@
-#preview{
-	width: 100%;
+#buffer{
+	width:100%;
 	text-align:center;
 }
-#pcanv {
-	display: inline;
+#preview{
+	clear:both;
+	position:relative;
+	z-index: 1;
+	max-width: 800px;
+	text-align:center;
+	margin: 0 auto;
+}
+#vcanv {
+	display:none;
+	display: relative;
+}
+#vcanv{
+	left:0px;
+	top:0px;
+	z-index: -1;
 }
 .input-group{
 	margin-top:2%;
@@ -11,4 +25,18 @@
 
 #dldiv{
 	margin-top:2%;
+}
+#video {  
+		position:absolute;
+		left:39%;
+		top:27%;
+		z-index: -3;
+        -webkit-transform: scaleX(-1);  
+        transform: scaleX(-1);    
+}
+#snapButton{
+	display:none;
+}
+#editPButton{
+	display:none;
 }
