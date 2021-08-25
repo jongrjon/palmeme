@@ -1,17 +1,132 @@
+//Fetching Video element by ID
+var video = document.getElementById('video');
+
+// Basic settings for the video to get from Webcam  
+const constraints = {  
+    audio: false,  
+    video: {  
+        width: 200, height: 200  
+    }  
+};  
+
+// This condition will ask permission to user for Webcam access  
+if (navigator.mediaDevices.getUserMedia) {  
+    navigator.mediaDevices.getUserMedia(constraints)  
+        .then(function (stream) {  
+            video.srcObject = stream;  
+        })  
+        .catch(function (err0r) {  
+            console.log("Something went wrong!");  
+        });  
+}  
+
+function stop(e) {  
+    var stream = video.srcObject;  
+    var tracks = stream.getTracks();  
+
+    for (var i = 0; i < tracks.length; i++) {  
+        var track = tracks[i];  
+        track.stop();  
+    }  
+    video.srcObject = null;  
+}
+
+//VIDEO CANVAS
+
+//Fetching Video Canvas
+var v = document.getElementById("vcanv");
+var vtx = v.getContext("2d");
+
+//Creating snapped image in code
+var snap = new Image;
+snap.src = "";
+
+//Drawing snapped image to Video Canvas
+picsnap = function(){
+	vtx.clearRect(0, 0, c.width, c.height);
+	vtx.restore();
+	vtx.translate(c.width, 0);
+	vtx.scale(-1, 1);
+	vtx.drawImage(video, 288, 215);
+	vtx.translate(c.width, 0);
+	vtx.scale(-1, 1);
+	vtx.drawImage(background,0,0);
+	snap = c.toDataURL("image/jpg");
+	snap.crossOrigin="anonymous";
+	change(lastval);
+	$("#editPButton").toggle();
+	$("#snapButton").toggle();
+
+}
+
+//PICTURE CANVAS
+
+//Fetching Picture Canvas
 var c = document.getElementById("pcanv");
 var ctx = c.getContext("2d");
 
-var background = new Image();
-background.src = "palmi.jpg";
+//Creating Palmi image from file
+var palmi = new Image();
+palmi.src = "palmi.jpg";
+palmi.crossOrigin="anonymous";
 
+var cutout = new Image();
+cutout.src = "palmi_transp.png"
+cutout.crossOrigin="anonymous";
+
+var background = palmi;
+
+//
 background.onload = function(){
-  ctx.drawImage(background,0,0);   
+	resetbg();
 }
+
+
+//Resetting BG
+resetbg = function(){
+	vtx.clearRect(0, 0, c.width, c.height);
+	vtx.restore();
+	ctx.clearRect(0, 0, c.width, c.height);
+	ctx.restore();
+	vtx.drawImage(background,0,0);
+	ctx.drawImage(v,0,0);
+	fontsize=60;
+	document.getElementById("fSize").value = fontsize;
+	lastval = "";
+	document.getElementById("palmisays").value = lastval;
+
+}
+
+//Take a new snap if 
+newsnap = function(){
+	background = cutout;
+	resetbg();
+	$("#editPButton").toggle();
+	$("#snapButton").toggle();
+}
+
+verap = function(){
+	background = cutout;
+	resetbg();
+	$("#snapButton").toggle();
+	$("#veraPButton").toggle();
+}
+
+stopp = function(){
+	background = palmi;
+	resetbg();
+	$("#editPButton").toggle();
+	$("#veraPButton").toggle();
+}
+
+
+
+//Last valid text input
 var lastval = "";
+//Input fontsize
 var fontsize = 60;
 
 change = function(val) {
-  
   ctx.font = fontsize+"px Impact";
   if(ctx.measureText(val).width<600){
   	lastval=val;
@@ -30,7 +145,7 @@ change = function(val) {
 inserttext =function(text){
 	ctx.clearRect(0, 0, c.width, c.height);
 	ctx.restore();
-	ctx.drawImage(background,0,0);
+	ctx.drawImage(v,0,0);
 	ctx.font = fontsize+"px Impact";
 	ctx.textAlign = "center";
 	height = 200;
@@ -48,7 +163,7 @@ fontchange = function(size){
   console.log(lastval);
 	change(lastval);
 }
-
+//Download Image
 imgdl = function(el){
 	var image = c.toDataURL("image/jpg");
 	image.crossOrigin="anonymous";
