@@ -11,4 +11,19 @@
 
 #dldiv{
 	margin-top:2%;
+<<<<<<< Updated upstream
+=======
+}
+#video {  
+		position:absolute;
+		left:39%;
+		top:27%;
+		z-index: -3;  
+}
+#snapButton{
+	display:none;
+}
+#editPButton{
+	display:none;
+>>>>>>> Stashed changes
 }
