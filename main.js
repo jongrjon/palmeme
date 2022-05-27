@@ -62,15 +62,20 @@ var c = document.getElementById("pcanv");
 var ctx = c.getContext("2d");
 
 //Creating Palmi image from file
-var palmi = new Image();
-palmi.src = "palmi.jpg";
-palmi.crossOrigin="anonymous";
+var solpalmi = new Image();
+solpalmi.src = "palmi_sol.jpg";
+solpalmi.crossOrigin="anonymous";
+
+var snjopalmi = new Image();
+snjopalmi.src = "palmi.jpg";
+snjopalmi.crossOrigin="anonymous";
 
 var cutout = new Image();
 cutout.src = "palmi_transp.png"
 cutout.crossOrigin="anonymous";
 
-var background = palmi;
+var background = solpalmi;
+ctx.fillStyle ="#FFF";
 
 //
 background.onload = function(){
@@ -104,18 +109,28 @@ newsnap = function(){
 verap = function(){
 	background = cutout;
 	resetbg();
+	ctx.fillStyle ="#000";
 	$("#snapButton").toggle();
 	$("#veraPButton").toggle();
 }
 
-stopp = function(){
-	background = palmi;
+snjop = function(){
+	background = snjopalmi;
 	resetbg();
+	ctx.fillStyle ="#000";
+}
+
+solp = function(){
+	background = solpalmi;
+	resetbg();
+	ctx.fillStyle ="#FFF";
+}
+
+stopp = function(){
+	snjop();
 	$("#editPButton").toggle();
 	$("#veraPButton").toggle();
 }
-
-
 
 //Last valid text input
 var lastval = "";
